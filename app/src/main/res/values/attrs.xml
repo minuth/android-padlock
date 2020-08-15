@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="ModernPinView">
-        <attr name="size" format="dimension"/>
+    <declare-styleable name="PadLockView">
+        <attr name="bodyColor" format="color"/>
+        <attr name="shackleColor" format="color"/>
+        <attr name="keyPadColor" format="color"/>
+        <attr name="textColor" format="color"/>
     </declare-styleable>
 </resources>

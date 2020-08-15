@@ -1,4 +1,4 @@
-package com.minuth.modernpin
+package com.minuth.padlock
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

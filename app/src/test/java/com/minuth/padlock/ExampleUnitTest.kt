@@ -1,4 +1,4 @@
-package com.minuth.modernpin
+package com.minuth.padlock
 
 import org.junit.Test
 

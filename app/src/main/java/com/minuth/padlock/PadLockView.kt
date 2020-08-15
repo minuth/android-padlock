@@ -1,22 +1,21 @@
-package com.minuth.modernpin
+package com.minuth.padlock
 
 import android.content.Context
 import android.graphics.*
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.View
-import androidx.core.graphics.toRect
 
 /**
  * Created by Minuth Prom.
  * Email: minuthprom321@gmail.com
  *​Crated date: 8/12/2020, 2:46 PM
  */
-class ModernPinView(context: Context, attributeSet: AttributeSet) : View(context, attributeSet){
+class PadLockView(context: Context, attributeSet: AttributeSet) : View(context, attributeSet){
 
     companion object{
         private const val PERCENT_PIN_BODY_TOP = 0.3846153846153846f
-        private const val PERCENT_PIN_BODY_RIGHT = 0.7692307692307692f
+        private const val PERCENT_PIN_BODY_HEIGHT = 1.3f
 
         private const val PERCENT_LOCK_STATUS_BORDER_WIDTH = 0.0769230769230769f
         private const val PERCENT_LOCK_STATUS_LEFT = 0.1076923076923077f
@@ -33,33 +32,42 @@ class ModernPinView(context: Context, attributeSet: AttributeSet) : View(context
 
         private const val PERCENT_LABEL_FONT_SIZE = 0.0615384615384615f
 
-        private const val DEFAULT_SIZE = 650
+        private const val DEFAULT_BODY_COLOR = Color.RED
+        private const val DEFAULT_SHACKLE_COLOR = Color.BLACK
+        private const val DEFAULT_KEY_PAD_COLOR = Color.BLACK
+        private const val DEFAULT_TEXT_COLOR = Color.BLACK
+        private const val DEFAULT_WIDTH = 500 // default width 500 and height = 130%(1.3) of width so height = 1.3 * 500 = 650
     }
-    private var size = DEFAULT_SIZE
+    private var size = DEFAULT_WIDTH * PERCENT_PIN_BODY_HEIGHT // size is represent for height
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
+    private var bodyColor: Int
+//    private var shackleColor: Int
+//    private var keyPadColor: Int
+//    private var textColor: Int
+
     init {
-//        val typedArray = context.theme.obtainStyledAttributes(attributeSet,R.styleable.ModernPinView,0,0)
-//        size = typedArray.getDimension(R.styleable.ModernPinView_size, DEFAULT_SIZE)
-//        typedArray.recycle()
+        val typedArray = context.theme.obtainStyledAttributes(attributeSet,R.styleable.PadLockView,0,0)
+        bodyColor = typedArray.getColor(R.styleable.PadLockView_bodyColor, DEFAULT_BODY_COLOR)
+        typedArray.recycle()
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         drawPinBody(canvas)
-        drawLockStatus(canvas)
+        drawShackle(canvas)
         drawKeyNum(canvas)
     }
 
     private fun drawPinBody(canvas: Canvas){
-        val rect = RectF(0f,size * PERCENT_PIN_BODY_TOP,size * PERCENT_PIN_BODY_RIGHT, size.toFloat())
+        val rect = RectF(0f,size * PERCENT_PIN_BODY_TOP,size * PERCENT_PIN_BODY_HEIGHT, size.toFloat())
         paint.apply {
             style = Paint.Style.FILL
             color = Color.RED
         }
         canvas.drawRoundRect(rect,20f,20f,paint)
     }
-    private fun drawLockStatus(canvas: Canvas){
+    private fun drawShackle(canvas: Canvas){
         paint.apply {
             style = Paint.Style.STROKE
             strokeWidth = size * PERCENT_LOCK_STATUS_BORDER_WIDTH
@@ -118,8 +126,8 @@ class ModernPinView(context: Context, attributeSet: AttributeSet) : View(context
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        size = measuredHeight
-        setMeasuredDimension((size * PERCENT_PIN_BODY_RIGHT).toInt(),size)
+        size = measuredWidth * PERCENT_PIN_BODY_HEIGHT
+        setMeasuredDimension(measuredWidth,size.toInt())
     }
 
 }

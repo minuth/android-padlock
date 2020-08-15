@@ -1,4 +1,4 @@
-package com.minuth.modernpin
+package com.minuth.padlock
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
