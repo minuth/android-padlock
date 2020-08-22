@@ -5,5 +5,7 @@
         <attr name="shackleColor" format="color"/>
         <attr name="keyPadColor" format="color"/>
         <attr name="textColor" format="color"/>
+        <attr name="onKeyPadSelectedColor" format="color"/>
+        <attr name="unlockStatus" format="boolean"/>
     </declare-styleable>
 </resources>
