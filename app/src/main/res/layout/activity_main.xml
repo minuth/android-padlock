@@ -8,11 +8,23 @@
     android:gravity="center"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/txtStatus"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="#4CAF50"
+        android:text="Locked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <com.minuth.padlock.PadLockView
+        android:layout_marginTop="20dp"
         app:onKeyPadSelectedColor="#083934"
         android:id="@+id/padLock"
-        app:keyPadColor="#009688"
+        app:keyPadColor="#F3DD1D"
         app:unlockStatus="false"
+        app:textColor="#000"
+        app:bodyColor="#F4BA0C"
         android:layout_width="300dp"
         android:layout_height="wrap_content" />
     <TextView

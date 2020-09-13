@@ -12,14 +12,14 @@ class MainActivity : AppCompatActivity() {
         padLock.eventListener = object : PadLockView.EventListener{
             override fun onConfirmClicked(pinValue: String) {
                 if(pinValue ==  "12345"){
+                    txtStatus.text = "Unlocked"
                     padLock.unlockStatus = true
                 }
             }
-
             override fun onClearClicked() {
+                txtStatus.text = "Locked"
                 padLock.unlockStatus = false
             }
-
         }
     }
 }

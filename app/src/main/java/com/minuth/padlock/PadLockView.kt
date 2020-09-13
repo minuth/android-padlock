@@ -79,13 +79,13 @@ class PadLockView(context: Context, attributeSet: AttributeSet) : View(context, 
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        drawPinBody(canvas)
         drawShackle(canvas)
+        drawPinBody(canvas)
         drawKeyNum(canvas)
     }
 
     private fun drawPinBody(canvas: Canvas){
-        val rect = RectF(0f,size * PERCENT_PIN_BODY_TOP,size * PERCENT_PIN_BODY_HEIGHT, size.toFloat())
+        val rect = RectF(0f,size * PERCENT_PIN_BODY_TOP,measuredWidth.toFloat(), size)
         paint.apply {
             style = Paint.Style.FILL
             color = bodyColor
@@ -97,6 +97,7 @@ class PadLockView(context: Context, attributeSet: AttributeSet) : View(context, 
             style = Paint.Style.STROKE
             strokeWidth = size * PERCENT_LOCK_STATUS_BORDER_WIDTH
             color = shackleColor
+            strokeCap = Paint.Cap.ROUND
         }
         val rect = RectF(size * PERCENT_LOCK_STATUS_LEFT,0f + (paint.strokeWidth /2f),size * PERCENT_LOCK_STATUS_RIGHT,size * PERCENT_LOCK_STATUS_BOTTOM)
         val keyUnlockedValue = if(unlockStatus) 0.8f else 1f
@@ -165,7 +166,7 @@ class PadLockView(context: Context, attributeSet: AttributeSet) : View(context, 
                         paint.color = keyPadColor
                     }
                 }
-                canvas.drawRect(rect, paint)
+                canvas.drawRoundRect(rect, 20f,20f, paint)
                 canvas.drawText(key.text,rect.right - (width /2),rect.bottom - (height /2) + (textBound.height()/2), paintText)
                 left = right + marginLeft
                 right = left + width
